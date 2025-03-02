@@ -47,21 +47,23 @@
                     <p>Home to some of the most beautiful desert golf courses in the world</p>
                 </div>
                 
-                <div class="card">
-                    <h3>Weather Forecast</h3>
-                    <div id="weather-widget">
-                        <div id="weather-loading">Loading weather data...</div>
-                        <div id="weather-content" style="display: none;">
-                            <div id="weather-icon"></div>
-                            <div id="weather-temp"></div>
-                            <div id="weather-description"></div>
-                            <div id="weather-details">
-                                <p><span class="label">Humidity:</span> <span id="weather-humidity"></span></p>
-                                <p><span class="label">Wind:</span> <span id="weather-wind"></span></p>
-                            </div>
+                <div class="weather-banner">
+                    <div class="weather-banner-content">
+                        <div class="weather-icon" id="weather-icon"></div>
+                        <div class="weather-info">
+                            <div class="weather-location">Palm Desert, CA</div>
+                            <div class="weather-temp" id="weather-temp">Loading...</div>
+                            <div class="weather-desc" id="weather-desc"></div>
                         </div>
-                        <div id="weather-error" style="display: none;">
-                            Unable to load weather data. Please try again later.
+                        <div class="weather-details">
+                            <div class="weather-detail">
+                                <span class="detail-label">Humidity:</span>
+                                <span class="detail-value" id="weather-humidity"></span>
+                            </div>
+                            <div class="weather-detail">
+                                <span class="detail-label">Wind:</span>
+                                <span class="detail-value" id="weather-wind"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
