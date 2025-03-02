@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Trip - Photos</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for the photo gallery */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 80%;
+        }
+        
+        .lightbox-image {
+            display: block;
+            max-width: 100%;
+            max-height: 80vh;
+            border: 3px solid white;
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 1001;
+        }
+        
+        .lightbox-prev, .lightbox-next {
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            padding: 0 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+        
+        .gallery-item {
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .caption {
+            opacity: 1;
+        }
+        
+        .photo-category {
+            margin-bottom: 40px;
+        }
+        
+        .upload-section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .upload-section h3 {
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+        
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .upload-btn {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background-color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="dashboard">
+            <h1>Photo Gallery</h1>
+            <p class="dashboard-intro">Share and view photos from our golf trip.</p>
+        </div>
+        
+        <!-- Main Navigation -->
+        <div class="nav-container">
+            <ul class="main-nav">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="lodging.html">Lodging</a></li>
+                <li><a href="flights.html">Flights</a></li>
+                <li><a href="tee-times.html">Tee Times</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="photos.html">Photos</a></li>
+            </ul>
+        </div>
+        
+        <!-- Upload Section -->
+        <div class="content-section">
+            <h2>Share Your Photos</h2>
+            <p>Upload your photos to share with the group. All photos will be organized into categories.</p>
+            
+            <div class="upload-section">
+                <h3>Upload New Photos</h3>
+                <div class="upload-form">
+                    <input type="file" id="photo-upload" accept="image/*" multiple>
+                    <select id="photo-category">
+                        <option value="courses">Golf Courses</option>
+                        <option value="group">Group Photos</option>
+                        <option value="action">Action Shots</option>
+                        <option value="scenery">Scenery</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <button class="upload-btn" id="upload-button">Upload Photos</button>
+                </div>
+                <p id="upload-status"></p>
+            </div>
+        </div>
+        
+        <!-- Golf Courses Photos -->
+        <div class="content-section photo-category">
+            <h2>Golf Courses</h2>
+            <p>Beautiful views of the courses we played.</p>
+            
+            <div class="gallery">
+                <div class="gallery-item" data-category="courses" data-index="1">
+                    <img src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pebble Beach Golf Links">
+                    <div class="caption">Pebble Beach Golf Links - 18th Hole</div>
+                </div>
+                <div class="gallery-item" data-category="courses" data-index="2">
+                    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Spyglass Hill">
+                    <div class="caption">Spyglass Hill - 4th Hole</div>
+                </div>
+                <div class="gallery-item" data-category="courses" data-index="3">
+                    <img src="https://images.unsplash.com/photo-1600170033898-2b4e864a6a4d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Spanish Bay">
+                    <div class="caption">The Links at Spanish Bay</div>
+                </div>
+                <div class="gallery-item" data-category="courses" data-index="4">
+                    <img src="https://images.unsplash.com/photo-1592919505780-303950717480?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pebble Beach">
+                    <div class="caption">Pebble Beach - 7th Hole</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group Photos -->
+        <div class="content-section photo-category">
+            <h2>Group Photos</h2>
+            <p>Memories with friends on our golf adventure.</p>
+            
+            <div class="gallery">
+                <div class="gallery-item" data-category="group" data-index="5">
+                    <img src="https://images.unsplash.com/photo-1529688530647-93a6e1916f5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Group at Pebble Beach">
+                    <div class="caption">Group photo at Pebble Beach</div>
+                </div>
+                <div class="gallery-item" data-category="group" data-index="6">
+                    <img src="https://images.unsplash.com/photo-1560073744-7643b964bdf1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dinner at The Lodge">
+                    <div class="caption">Dinner at The Lodge</div>
+                </div>
+                <div class="gallery-item" data-category="group" data-index="7">
+                    <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Team A">
+                    <div class="caption">Team A before the match</div>
+                </div>
+                <div class="gallery-item" data-category="group" data-index="8">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Team B">
+                    <div class="caption">Team B celebrating</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Shots -->
+        <div class="content-section photo-category">
+            <h2>Action Shots</h2>
+            <p>Capturing the perfect swing and memorable moments on the course.</p>
+            
+            <div class="gallery">
+                <div class="gallery-item" data-category="action" data-index="9">
+                    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Teeing Off">
+                    <div class="caption">John teeing off at Pebble Beach</div>
+                </div>
+                <div class="gallery-item" data-category="action" data-index="10">
+                    <img src="https://images.unsplash.com/photo-1494260763583-560d8b93cbc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Putting">
+                    <div class="caption">Mike's clutch putt on 18</div>
+                </div>
+                <div class="gallery-item" data-category="action" data-index="11">
+                    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bunker Shot">
+                    <div class="caption">David's amazing bunker shot</div>
+                </div>
+                <div class="gallery-item" data-category="action" data-index="12">
+                    <img src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Driving">
+                    <div class="caption">Richard's drive on the 14th</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scenery Photos -->
+        <div class="content-section photo-category">
+            <h2>Scenery</h2>
+            <p>The beautiful landscapes of Pebble Beach and the Monterey Peninsula.</p>
+            
+            <div class="gallery">
+                <div class="gallery-item" data-category="scenery" data-index="13">
+                    <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Coastline">
+                    <div class="caption">Stunning coastline views</div>
+                </div>
+                <div class="gallery-item" data-category="scenery" data-index="14">
+                    <img src="https://images.unsplash.com/photo-1468476396571-4d6f2a427ee7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sunset">
+                    <div class="caption">Sunset at Spanish Bay</div>
+                </div>
+                <div class="gallery-item" data-category="scenery" data-index="15">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="17 Mile Drive">
+                    <div class="caption">The famous Lone Cypress on 17-Mile Drive</div>
+                </div>
+                <div class="gallery-item" data-category="scenery" data-index="16">
+                    <img src="https://images.unsplash.com/photo-1543731068-7e0f5beff43a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Morning Fog">
+                    <div class="caption">Morning fog rolling in</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lightbox for Photo Viewing -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-close" id="lightbox-close">&times;</div>
+            <div class="lightbox-content">
+                <img src="" alt="" class="lightbox-image" id="lightbox-image">
+                <div class="lightbox-caption" id="lightbox-caption"></div>
+            </div>
+            <div class="lightbox-nav">
+                <div class="lightbox-prev" id="lightbox-prev">&lt;</div>
+                <div class="lightbox-next" id="lightbox-next">&gt;</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Photo gallery lightbox functionality
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            
+            let currentIndex = 0;
+            
+            // Open lightbox when clicking on a gallery item
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    const caption = this.querySelector('.caption').textContent;
+                    currentIndex = parseInt(this.getAttribute('data-index'));
+                    
+                    lightboxImage.src = imgSrc;
+                    lightboxCaption.textContent = caption;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close lightbox
+            lightboxClose.addEventListener('click', function() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Navigate to previous image
+            lightboxPrev.addEventListener('click', function() {
+                navigateGallery(-1);
+            });
+            
+            // Navigate to next image
+            lightboxNext.addEventListener('click', function() {
+                navigateGallery(1);
+            });
+            
+            // Navigate through gallery
+            function navigateGallery(direction) {
+                currentIndex += direction;
+                
+                // Loop back to the end if at the beginning
+                if (currentIndex < 1) {
+                    currentIndex = galleryItems.length;
+                }
+                
+                // Loop back to the beginning if at the end
+                if (currentIndex > galleryItems.length) {
+                    currentIndex = 1;
+                }
+                
+                // Find the gallery item with the current index
+                const newItem = document.querySelector(`.gallery-item[data-index="${currentIndex}"]`);
+                
+                if (newItem) {
+                    const imgSrc = newItem.querySelector('img').src;
+                    const caption = newItem.querySelector('.caption').textContent;
+                    
+                    lightboxImage.src = imgSrc;
+                    lightboxCaption.textContent = caption;
+                }
+            }
+            
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Handle keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                } else if (e.key === 'ArrowLeft') {
+                    navigateGallery(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateGallery(1);
+                }
+            });
+            
+            // Photo upload functionality (simulated)
+            const uploadButton = document.getElementById('upload-button');
+            const uploadStatus = document.getElementById('upload-status');
+            
+            uploadButton.addEventListener('click', function() {
+                const fileInput = document.getElementById('photo-upload');
+                
+                if (fileInput.files.length > 0) {
+                    uploadStatus.textContent = 'Uploading ' + fileInput.files.length + ' photos...';
+                    
+                    // Simulate upload process
+                    setTimeout(function() {
+                        uploadStatus.textContent = 'Photos uploaded successfully! They will be reviewed and added to the gallery.';
+                        fileInput.value = '';
+                    }, 2000);
+                } else {
+                    uploadStatus.textContent = 'Please select photos to upload.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
