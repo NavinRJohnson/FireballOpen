@@ -106,41 +106,6 @@
         .photo-category {
             margin-bottom: 40px;
         }
-        
-        .upload-section {
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .upload-section h3 {
-            margin-bottom: 15px;
-            color: #2e7d32;
-        }
-        
-        .upload-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .upload-btn {
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        
-        .upload-btn:hover {
-            background-color: #1b5e20;
-        }
     </style>
 </head>
 <body>
@@ -148,7 +113,7 @@
         <!-- Dashboard Header -->
         <div class="dashboard">
             <h1>Photo Gallery</h1>
-            <p class="dashboard-intro">Share and view photos from our golf trip.</p>
+            <p class="dashboard-intro">View photos from our golf trip.</p>
         </div>
         
         <!-- Main Navigation -->
@@ -158,31 +123,16 @@
                 <li><a href="lodging.html">Lodging</a></li>
                 <li><a href="flights.html">Flights</a></li>
                 <li><a href="tee-times.html">Tee Times</a></li>
+                <li><a href="expenses.html">Expenses</a></li>
                 <li><a href="results.html">Results</a></li>
                 <li><a href="photos.html">Photos</a></li>
             </ul>
         </div>
         
-        <!-- Upload Section -->
+        <!-- Photo Gallery Introduction -->
         <div class="content-section">
-            <h2>Share Your Photos</h2>
-            <p>Upload your photos to share with the group. All photos will be organized into categories.</p>
-            
-            <div class="upload-section">
-                <h3>Upload New Photos</h3>
-                <div class="upload-form">
-                    <input type="file" id="photo-upload" accept="image/*" multiple>
-                    <select id="photo-category">
-                        <option value="courses">Golf Courses</option>
-                        <option value="group">Group Photos</option>
-                        <option value="action">Action Shots</option>
-                        <option value="scenery">Scenery</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <button class="upload-btn" id="upload-button">Upload Photos</button>
-                </div>
-                <p id="upload-status"></p>
-            </div>
+            <h2>Trip Photos</h2>
+            <p>A collection of photos from our golf trip. Photos are organized by category below.</p>
         </div>
         
         <!-- Golf Courses Photos -->
@@ -388,26 +338,6 @@
                     navigateGallery(-1);
                 } else if (e.key === 'ArrowRight') {
                     navigateGallery(1);
-                }
-            });
-            
-            // Photo upload functionality (simulated)
-            const uploadButton = document.getElementById('upload-button');
-            const uploadStatus = document.getElementById('upload-status');
-            
-            uploadButton.addEventListener('click', function() {
-                const fileInput = document.getElementById('photo-upload');
-                
-                if (fileInput.files.length > 0) {
-                    uploadStatus.textContent = 'Uploading ' + fileInput.files.length + ' photos...';
-                    
-                    // Simulate upload process
-                    setTimeout(function() {
-                        uploadStatus.textContent = 'Photos uploaded successfully! They will be reviewed and added to the gallery.';
-                        fileInput.value = '';
-                    }, 2000);
-                } else {
-                    uploadStatus.textContent = 'Please select photos to upload.';
                 }
             });
         });
