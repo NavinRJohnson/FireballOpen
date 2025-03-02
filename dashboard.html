@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Dashboard Header -->
         <div class="dashboard">
-            <h1>Palm Desert Golf Trip</h1>
+            <h1>Golf Trip Dashboard</h1>
             <p class="dashboard-intro">Welcome to our golf trip planner! Use the navigation below to access all the information you need for our upcoming golf adventure.</p>
         </div>
         
@@ -30,27 +30,40 @@
         <!-- Trip Overview Section -->
         <div class="content-section">
             <h2>Trip Overview</h2>
-            <p>Get ready for an unforgettable golf experience! We've planned an amazing trip with rounds at some of the most beautiful courses, comfortable accommodations, and plenty of time for fun and relaxation.</p>
+            <p>Get ready for an unforgettable golf experience! We've planned an amazing trip with rounds at some of the most beautiful courses in Palm Desert, comfortable accommodations, and plenty of time for fun and relaxation.</p>
             
             <div class="card-container">
                 <div class="card">
                     <h3>Trip Dates</h3>
                     <p><span class="label">Start Date:</span> March 27, 2025</p>
                     <p><span class="label">End Date:</span> March 31, 2025</p>
-                    <p>5 nights, 4 rounds of golf</p>
+                    <p>4 nights, 4 rounds of golf</p>
                 </div>
                 
                 <div class="card">
                     <h3>Location</h3>
-                    <p><span class="label">Destination:</span> Palmn Desert, California</p>
-                    <p><span class="label">Resort:</span> The Sandpiper</p>
-                    <p>Home to some of the most iconic golf courses in the world</p>
+                    <p><span class="label">Destination:</span> Palm Desert, California</p>
+                    <p><span class="label">Resort:</span> Sandpiper at Palm Desert</p>
+                    <p>Home to some of the most beautiful desert golf courses in the world</p>
                 </div>
                 
                 <div class="card">
                     <h3>Weather Forecast</h3>
-                    <div id="openweathermap-widget-11"></div>
-                    <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script><script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 11,cityid: '5380626',appid: '90099e5009cc18dc83be73cf909963b3',units: 'imperial',containerid: 'openweathermap-widget-11',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
+                    <div id="weather-widget">
+                        <div id="weather-loading">Loading weather data...</div>
+                        <div id="weather-content" style="display: none;">
+                            <div id="weather-icon"></div>
+                            <div id="weather-temp"></div>
+                            <div id="weather-description"></div>
+                            <div id="weather-details">
+                                <p><span class="label">Humidity:</span> <span id="weather-humidity"></span></p>
+                                <p><span class="label">Wind:</span> <span id="weather-wind"></span></p>
+                            </div>
+                        </div>
+                        <div id="weather-error" style="display: none;">
+                            Unable to load weather data. Please try again later.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,26 +73,27 @@
             <h2>Quick Links</h2>
             <div class="card-container">
                 <div class="card">
-                    <h3>Important Contacts</h3>
-                    <p><span class="label">Trip Coordinator:</span> Tom Cruikshank</p>
-                    <p><span class="label">Phone:</span> (909) 362-4925</p>
-                    <p><span class="label">Email:</span> jtcruikshank@roadrunner.com</p>
+                    <h3>Golfers</h3>
+                    <p><span class="label">Dave</span></p>
+                    <p><span class="label">Garret</span></p>
+                    <p><span class="label">Steve</span></p>
+                    <p><span class="label">Andy</span></p>
                 </div>
                 
                 <div class="card">
                     <h3>Packing List</h3>
                     <p>• Golf clubs and golf shoes</p>
-                    <p>• Appropriate golf attire</p>
+                    <p>• Appropriate golf attire (shorts, polos)</p>
                     <p>• Casual evening wear</p>
-                    <p>• Sunscreen and hat</p>
-                    <p>• Travel documents</p>
+                    <p>• Sunscreen and hat (desert sun is strong!)</p>
+                    <p>• Sunglasses and water bottle</p>
                 </div>
                 
                 <div class="card">
-                    <h3>Useful Resources</h3>                                     
-                    <p>• <a href="https://www.pebblebeach.com/" target="_blank">Pebble Beach Resort</a></p>
-                    <p>• <a href="https://www.weather.gov/" target="_blank">Weather Updates</a></p>
-                    <p>• <a href="https://www.tsa.gov/travel/security-screening" target="_blank">TSA Guidelines</a></p>
+                    <h3>Useful Resources</h3>
+                    <p>• <a href="https://www.pgawest.com/" target="_blank">PGA West</a></p>
+                    <p>• <a href="https://www.escenagolf.com/" target="_blank">Escena Golf Club</a></p>
+                    <p>• <a href="https://www.laquintaresort.com/" target="_blank">La Quinta Resort</a></p>
                 </div>
             </div>
         </div>
