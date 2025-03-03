@@ -10,8 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Fetch weather data for the banner
-    fetchWeatherData();
+    // Check if weather elements exist before fetching weather data
+    if (document.getElementById('weather-temp')) {
+        fetchWeatherData();
+    }
 });
 
 // Function to fetch weather data from OpenWeatherMap API
@@ -30,18 +32,27 @@ function fetchWeatherData() {
         })
         .then(data => {
             // Update weather banner with data
-            document.getElementById('weather-temp').textContent = `${Math.round(data.main.temp)}°F`;
-            document.getElementById('weather-desc').textContent = data.weather[0].description;
-            document.getElementById('weather-humidity').textContent = `${data.main.humidity}%`;
-            document.getElementById('weather-wind').textContent = `${Math.round(data.wind.speed)} mph`;
+            const tempElement = document.getElementById('weather-temp');
+            const descElement = document.getElementById('weather-desc');
+            const humidityElement = document.getElementById('weather-humidity');
+            const windElement = document.getElementById('weather-wind');
+            const iconElement = document.getElementById('weather-icon');
+            
+            if (tempElement) tempElement.textContent = `${Math.round(data.main.temp)}°F`;
+            if (descElement) descElement.textContent = data.weather[0].description;
+            if (humidityElement) humidityElement.textContent = `${data.main.humidity}%`;
+            if (windElement) windElement.textContent = `${Math.round(data.wind.speed)} mph`;
             
             // Set weather icon
-            const iconCode = data.weather[0].icon;
-            const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-            document.getElementById('weather-icon').innerHTML = `<img src="${iconUrl}" alt="${data.weather[0].description}">`;
+            if (iconElement) {
+                const iconCode = data.weather[0].icon;
+                const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+                iconElement.innerHTML = `<img src="${iconUrl}" alt="${data.weather[0].description}">`;
+            }
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
-            document.getElementById('weather-temp').textContent = 'Weather data unavailable';
+            const tempElement = document.getElementById('weather-temp');
+            if (tempElement) tempElement.textContent = 'Weather data unavailable';
         });
 }

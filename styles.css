@@ -299,6 +299,28 @@ body {
     transform: scale(1.05);
 }
 
+/* Photo Link Style */
+.photo-link {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.photo-link:hover {
+    background-color: #1b5e20;
+    transform: translateY(-2px);
+}
+
+.photo-link:active {
+    transform: translateY(0);
+}
+
 /* Table Styles for Tee Times and Results */
 .info-table {
     width: 100%;
